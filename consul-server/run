@@ -1,0 +1,1 @@
+docker run --rm --name consul-server ivanfoong/alpine-consul

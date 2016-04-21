@@ -1,0 +1,1 @@
+docker run --rm --name alpine-consul-python-example --link consul-server:consul-agent -p 4000:4000 ivanfoong/alpine-consul-python-example

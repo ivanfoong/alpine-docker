@@ -1,0 +1,2 @@
+docker run --rm --name consul-ui --link consul-server:consul-agent -p 8500:8500 ivanfoong/alpine-consul-ui
+
