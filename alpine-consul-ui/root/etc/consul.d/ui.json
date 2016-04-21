@@ -1,0 +1,8 @@
+{
+    "data_dir": "/data/consul",
+    "ui_dir": "/ui",
+    "addresses": {
+        "http": "0.0.0.0"
+    },
+    "leave_on_terminate": true
+}

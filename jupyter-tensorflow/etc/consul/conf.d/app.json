@@ -1,0 +1,13 @@
+{
+    "service": {
+        "name": "Juypter Tensorflow",
+        "tags": ["jupyter","tensorflow","python"],
+        "port": 8888,
+        "checks": [
+            {
+                "script": "curl localhost:8888/ >/dev/null 2>&1",
+                "interval": "5s"
+            }
+        ]
+    }
+}

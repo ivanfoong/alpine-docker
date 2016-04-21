@@ -1,0 +1,1 @@
+docker run --rm --name jupyter-tensorflow --link consul-server:consul-agent -p 8888:8888 -v $PWD/notebooks:/notebooks ivanfoong/jupyter-tensorflow

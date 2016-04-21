@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv sh
+
+BIND=`getent hosts ${HOSTNAME} | awk '{print $1}'`
+
+exec s6-setuidgid consul consul agent -config-dir /etc/consul.d/bootstrap -bind ${BIND};

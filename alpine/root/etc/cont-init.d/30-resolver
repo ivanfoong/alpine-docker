@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z "$GO_DNSMASQ_LOG_FILE" ]; then
+    printf "/var/log/go-dnsmasq/go-dnsmasq.log" > /var/run/s6/container_environment/GO_DNSMASQ_LOG_FILE
+fi
