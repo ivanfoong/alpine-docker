@@ -1,7 +1,7 @@
 {
     "service": {
-        "name": "app",
-        "tags": ["app","python"],
+        "name": "python-example",
+        "tags": [],
         "port": 4000,
         "checks": [
             {

@@ -1,7 +1,6 @@
 FROM ivanfoong/alpine-consul-python
 
+ADD root /
 WORKDIR /app
-COPY /app /app
-# RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 EXPOSE 4000
-CMD ["python", "/app/server.py"]

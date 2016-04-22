@@ -1,7 +1,7 @@
 {
     "service": {
-        "name": "Juypter Tensorflow",
-        "tags": ["jupyter","tensorflow","python"],
+        "name": "juypter-tensorflow",
+        "tags": [],
         "port": 8888,
         "checks": [
             {
