@@ -1,39 +1,38 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from wsgiref.simple_server import make_server
+from pyramid.config import Configurator
+from pyramid.response import Response
+from pyramid.view import view_config
 import consul
-import json
 
 PORT_NUMBER = 4000
 
-#This class will handles any incoming request from
-#the browser 
-class myHandler(BaseHTTPRequestHandler):
+c = consul.Consul()
 
-  #Handler for the GET requests
-  def do_GET(self):
-    c = consul.Consul()
-    self.send_response(200)
-    self.send_header('Content-type','application/json')
-    self.end_headers()
+def rootHandler(request):
     body = {"services": []}
     (_, services) = c.catalog.services()
     for serviceName in services:
-      (_, nodes) = c.catalog.service(serviceName)
-      for node in nodes:
-        body["services"].append(node)
-    self.wfile.write(json.dumps(body, ensure_ascii=False))
-    return
+        (_, nodes) = c.catalog.service(serviceName)
+        for node in nodes:
+            body["services"].append(node)
+    return body
 
-try:
-  #Create a web server and define the handler to manage the
-  #incoming request
-  server = HTTPServer(('', PORT_NUMBER), myHandler)
-  print 'Started httpserver on port ' , PORT_NUMBER
+def healthHandler(request):
+    return {"status": 1}
 
-  #Wait forever for incoming htto requests
-  server.serve_forever()
-except KeyboardInterrupt:
-  print '^C received, shutting down the web server'
-  server.socket.close()
+if __name__ == '__main__':
+    try:
+        config = Configurator()
+        config.add_route('root', '/')
+        config.add_route('health', '/health')
+        config.add_view(rootHandler, route_name='root', renderer='json')
+        config.add_view(healthHandler, route_name='health', renderer='json')
+        app = config.make_wsgi_app()
+        server = make_server('0.0.0.0', PORT_NUMBER, app)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print '^C received, shutting down the web server'
+        server.socket.close()

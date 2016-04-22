@@ -5,7 +5,7 @@
         "port": 4000,
         "checks": [
             {
-                "script": "curl localhost:4000/ >/dev/null 2>&1",
+                "script": "curl localhost:4000/health >/dev/null 2>&1",
                 "interval": "5s"
             }
         ]
