@@ -1,0 +1,16 @@
+version: '2'
+services:
+  app:
+    build: .
+    container_name: jupyter-tensorflow
+    external_links:
+      - "consul-server:consul-agent"
+    networks:
+      - consul
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/notebooks
+networks:
+  consul:
+    external: true

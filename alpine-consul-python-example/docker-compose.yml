@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    build: .
+    container_name: alpine-consul-python-example
+    external_links:
+      - "consul-server:consul-agent"
+    networks:
+      - consul
+    ports:
+      - "4000:4000"
+networks:
+  consul:
+    external: true

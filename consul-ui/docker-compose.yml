@@ -1,0 +1,14 @@
+version: '2'
+services:
+  ui:
+    image: ivanfoong/alpine-consul-ui
+    container_name: consul-ui
+    external_links:
+      - "consul-server:consul-agent"
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+networks:
+  consul:
+    external: true

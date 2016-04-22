@@ -1,0 +1,10 @@
+version: '2'
+services:
+  server:
+    image: ivanfoong/alpine-consul
+    container_name: consul-server
+    networks:
+      - consul
+networks:
+  consul:
+    external: true
